@@ -21,9 +21,8 @@
         handleError("Nom d'utilisateur ou email déjà utilisé");
     }
     else {
-        $id = 11;
         $password = hash('sha256', $_POST['password']);
-        $AccountManager->addAccount($id, $_POST['username'], $password, $_POST['email']);
+        $AccountManager->addAccount($_POST['username'], $password, $_POST['email']);
     }
 
 ?>
