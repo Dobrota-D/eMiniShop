@@ -2,7 +2,7 @@
 
 try {
     $bdd = new PDO('mysql:host=2eurhost.com;dbname=eurh_groupe7;charset=utf8', "groupe7", "lrLi70$7");
-    echo 'Success connection to db';
+    echo 'connection successful';
 }
 catch (Exception $e)
 {
