@@ -49,8 +49,6 @@ class AccountManager extends Manager {
         return $account;
     }
 
-
-
     function addAccount($username, $password, $email){
         $creation_date = date('Y/m/d H:i:s');
         $query = $this->db->prepare("INSERT INTO account (username, password, email, creation_date, is_admin) VALUES (:username, :password, :email, :creation_date, 0)");
