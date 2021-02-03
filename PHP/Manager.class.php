@@ -24,17 +24,29 @@ class AccountManager extends Manager {
         $query = $this->db->prepare("SELECT * FROM account WHERE id_user = :id_user");
         $query->bindValue(':id_user', $id_user);
         $query->execute();
-        
-        $data = $query->fetch(PDO::FETCH_ASSOC);
-        return $data;
+        $account_from_sql = $query->fetch(PDO::FETCH_ASSOC);
+        $account->hydrate($account_from_sql);
+        return $account;
     }
 
     function getByUsername($username) {
         $query = $this->db->prepare("SELECT * FROM account WHERE username = :username");
         $query->bindValue(':username', $username);
         $query->execute();
-        $data = $query->fetch(PDO::FETCH_ASSOC);
-        return $data;
+        $account_from_sql = $query->fetch(PDO::FETCH_ASSOC);
+        $account = new Account();
+        $account->hydrate($account_from_sql);
+        return $account;
+    }
+
+    function getByEmail($email) {
+        $query = $this->db->prepare("SELECT * FROM account WHERE email = :email");
+        $query->bindValue(':email', $email);
+        $query->execute();
+        $account_from_sql = $query->fetch(PDO::FETCH_ASSOC);
+        $account = new Account();
+        $account->hydrate($account_from_sql);
+        return $account;
     }
 
 
@@ -46,10 +58,19 @@ class AccountManager extends Manager {
         $query->bindValue(':password', $password);
         $query->bindValue(':email', $email);
         $query->bindValue(':creation_date', $creation_date);
-
         $query->execute();
 
     }
+
+
+    function deleteAccount($username, $email){
+        $query = $this->db->prepare("DELETE FROM account WHERE email=:email AND username=:username");
+        $query->bindValue(':username', $username);
+        $query->bindValue(':email', $email);
+        $query->execute();
+
+    }
+
 
     function updateAccount_password($id_user, $changed_value){
         $query = $this->db->prepare("UPDATE account SET password=:changed_value WHERE id_user=:id_user");

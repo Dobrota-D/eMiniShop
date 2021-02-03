@@ -1,34 +1,28 @@
 <?php 
 
 class Account {
-    public $id;
+    public $id_user;
     public $username;
     public $email;
     private $password;
-    public $created;
-    public $is_Admin;
+    public $creation_date;
+    public $is_admin;
 
-    function __construct($id, $username, $password, $email, $is_Admin) {
+    function __construct() {
         echo "Test constructor called";
-        $this->username = $username;
-        $this->email = $email;
-        $this->id = $id;
-        $this->is_Admin = $is_Admin;
-        $this->setPassword($password);
-        $this->created = date('Y-m-d H:i:s');
+        
     }
 
-    function setPassword($password) {
-        $this->password = hash('sha256', $password);
+
+
+    public function hydrate(array $datas){
+        var_dump($datas);
+        foreach($datas as $key => $value) {
+             $this->$key = $value;
+            
+        }
     }
 
-    function getPassword() {
-        return $this->password;
-    }
-
-    public static function generateAccount() {
-        return new Account("testor", random_int(0,100));
-    }
 }
 
 ?>
