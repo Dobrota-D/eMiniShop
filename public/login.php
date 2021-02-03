@@ -33,7 +33,7 @@
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Connexion">
             </div>
-            <p>Vous n'avez pas de compte ? <a href="register.php">S'inscrire</a>.</p>
+            <p>Vous n'avez pas de compte ? <a href="./signupForm.php">S'inscrire</a>.</p>
         </form>
     </div>
 </body>
