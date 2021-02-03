@@ -21,8 +21,16 @@
         handleError("Nom d'utilisateur ou email déjà utilisé");
     }
     else {
+        // Create the new account
         $password = hash('sha256', $_POST['password']);
         $AccountManager->addAccount($_POST['username'], $password, $_POST['email']);
+
+        // Start session and redirect the user
+
+        $_SESSION["loggedin"] = true;
+        $_SESSION["username"] = $_POST['username'];
+
+        header('Location: ../public/Index.php');
     }
 
 ?>
