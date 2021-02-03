@@ -6,9 +6,10 @@
     <title>Accueil</title>
 </head>
 <body>
-<?php var_dump($_SESSION) ?>
     <header>
-        <p>Connecté en tant que <?php print($_SESSION["username"]) ?></p>
+    <?php
+        var_dump($_SESSION);
+    ?>    
         <button>Déconnexion</button>
         <button>Supprimer mon compte</button>
     </header>

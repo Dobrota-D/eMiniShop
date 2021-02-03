@@ -22,7 +22,7 @@
     }
     else {
         // Create the new account
-        $password = hash('sha256', $_POST['password']);
+        $password = password_hash($_POST['password'], $PASSWORD_DEFAULT);
         $AccountManager->addAccount($_POST['username'], $password, $_POST['email']);
 
         // Start session and redirect the user

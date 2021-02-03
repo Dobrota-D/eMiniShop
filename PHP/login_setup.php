@@ -1,7 +1,4 @@
 <?php
-// Initialize the session
-session_start();
- 
 // Check if the user is already logged in, if yes then redirect him to welcome page
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     header("location: welcome.php");
@@ -35,9 +32,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Validate credentials
     if(empty($username_err) && empty($password_err)){
         // Prepare a select statement
-        $sql = "SELECT id, username, password FROM account WHERE username = :username";
+        $sql = "SELECT id_user, username, password FROM account WHERE username = :username";
         
-        if($stmt = $pdo->prepare($sql)){
+        if($stmt = $bdd->prepare($sql)){
             // Bind variables to the prepared statement as parameters
             $stmt->bindParam(":username", $param_username, PDO::PARAM_STR);
             
@@ -51,10 +48,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     if($row = $stmt->fetch()){
                         $username = $row["username"];
                         $hashed_password = $row["password"];
+                        var_dump(password_verify($password, $hashed_password));
                         if(password_verify($password, $hashed_password)){
-                            // Password is correct, so start a new session
-                            session_start();
-                            
                             // Store data in session variables
                             $_SESSION["loggedin"] = true;
                             $_SESSION["username"] = $username;                            
