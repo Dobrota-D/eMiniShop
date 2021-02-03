@@ -4,7 +4,6 @@ require_once "Account.class.php";
 
 class Manager {
     protected $db;
-
     function __construct($db) {
         $this->setDb($db);
     }
@@ -34,20 +33,20 @@ class AccountManager extends Manager {
         $query = $this->db->prepare("SELECT * FROM account WHERE username = :username");
         $query->bindValue(':username', $username);
         $query->execute();
-        
         $data = $query->fetch(PDO::FETCH_ASSOC);
         return $data;
     }
 
 
 
-    function addAccount($id_user, $username, $password, $email){
-        $new_account = new Account($id_user, $username, $password, $email, 0);
-        $query = $this->db->prepare("INSERT INTO account (id_user, username, password, email, is_admin) VALUES (:id_user, :username, :password, :email, 0)");
-        $query->bindValue(':id_user', $id_user);
+    function addAccount($username, $password, $email){
+        $creation_date = date('Y/m/d H:i:s');
+        $query = $this->db->prepare("INSERT INTO account (username, password, email, creation_date, is_admin) VALUES (:username, :password, :email, :creation_date, 0)");
         $query->bindValue(':username', $username);
         $query->bindValue(':password', $password);
         $query->bindValue(':email', $email);
+        $query->bindValue(':creation_date', $creation_date);
+
         $query->execute();
 
     }
@@ -77,7 +76,7 @@ class AccountManager extends Manager {
     }
     
     function isAccountValid($username, $email) {
-        $query = $this->db->prepare("SELECT * FROM account WHERE username=:username AND email=:email");
+        $query = $this->db->prepare("SELECT * FROM account WHERE username=:username OR email=:email");
         $query->bindValue(':username', $username);
         $query->bindValue(':email', $email);
         $query->execute();

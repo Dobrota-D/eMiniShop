@@ -6,6 +6,7 @@ class Account {
     public $email;
     private $password;
     public $created;
+    public $is_Admin;
 
     function __construct($id, $username, $password, $email, $is_Admin) {
         echo "Test constructor called";
