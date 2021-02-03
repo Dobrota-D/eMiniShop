@@ -76,7 +76,21 @@ class AccountManager extends Manager {
 
     }
     
+    function isAccountValid($username, $email) {
+        $query = $this->db->prepare("SELECT * FROM account WHERE username=:username AND email=:email");
+        $query->bindValue(':username', $username);
+        $query->bindValue(':email', $email);
+        $query->execute();
 
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+
+        if (count($data) > 0) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
 
 
 
