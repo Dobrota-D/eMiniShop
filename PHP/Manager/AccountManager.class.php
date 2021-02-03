@@ -1,19 +1,6 @@
 <?php
 
-require_once "Account.class.php";
-
-class Manager {
-    protected $db;
-    function __construct($db) {
-        $this->setDb($db);
-    }
-
-    function setDb($db) {
-        $this->db = $db;
-    }
-}    
-
-
+require_once "Manager.class.php";
 
 class AccountManager extends Manager {
     function __construct($db) {
@@ -52,6 +39,18 @@ class AccountManager extends Manager {
     function addAccount($username, $password, $email){
         $creation_date = date('Y/m/d H:i:s');
         $query = $this->db->prepare("INSERT INTO account (username, password, email, creation_date, is_admin) VALUES (:username, :password, :email, :creation_date, 0)");
+        $query->bindValue(':username', $username);
+        $query->bindValue(':password', $password);
+        $query->bindValue(':email', $email);
+        $query->bindValue(':creation_date', $creation_date);
+        $query->execute();
+
+    }
+
+
+    function addAdminAccount($username, $password, $email){
+        $creation_date = date('Y/m/d H:i:s');
+        $query = $this->db->prepare("INSERT INTO account (username, password, email, creation_date, is_admin) VALUES (:username, :password, :email, :creation_date, 1)");
         $query->bindValue(':username', $username);
         $query->bindValue(':password', $password);
         $query->bindValue(':email', $email);
@@ -118,6 +117,5 @@ class AccountManager extends Manager {
     
 
 }
-
 
 ?>

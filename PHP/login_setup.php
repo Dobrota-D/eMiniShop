@@ -6,7 +6,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 }
  
 // Include db file
-require_once "../PHP/db.php";
+require_once "init.php";
  
 // Define variables and initialize with empty values
 $username = $password = "";
@@ -51,11 +51,21 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         var_dump(password_verify($password, $hashed_password));
                         if(password_verify($password, $hashed_password)){
                             // Store data in session variables
+                            $account = $AccountManager->getByUsername($username);
+
                             $_SESSION["loggedin"] = true;
-                            $_SESSION["username"] = $username;                            
+                            $_SESSION["username"] = $username;         
+                            $_SESSION["is_admin"] = $account->is_admin;         
+                                             
                             
-                            // Redirect user to welcome page
-                            header("Location: ../public/index.php");
+                            //If user is an admin
+                            if ($account->is_admin == 1){
+                                header("Location: ../public/admin.php");
+                            }
+                            else {
+                                // Redirect user to welcome page
+                                header("Location: ../public/index.php");
+                            }    
                         } else{
                             // Display an error message if password is not valid
                             $password_err = "The password you entered was not valid.";

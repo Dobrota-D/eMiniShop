@@ -13,11 +13,12 @@
 <body>
     <header>
     <?php
+
         var_dump($_SESSION);
     ?>    
         <button>Déconnexion</button>
         <button>Supprimer mon compte</button>
     </header>
-    <p>Yo</p>
+    <p>JESUIS ADMIN</p>
 </body>
 </html>
