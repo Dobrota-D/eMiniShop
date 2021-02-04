@@ -7,38 +7,38 @@ class ArticleManager extends Manager {
         parent::__construct($db);
     }
 
-    function getById($id_user) {
-        $query = $this->db->prepare("SELECT * FROM account WHERE id_user = :id_user");
-        $query->bindValue(':id_user', $id_user);
+    function getById($id_article) {
+        $query = $this->db->prepare("SELECT * FROM article WHERE id_article = :id_article");
+        $query->bindValue(':id_article', $id_article);
         $query->execute();
-        $account_from_sql = $query->fetch(PDO::FETCH_ASSOC);
-        $account->hydrate($account_from_sql);
-        return $account;
+        $article_from_sql = $query->fetch(PDO::FETCH_ASSOC);
+        $article->hydrate($article_from_sql);
+        return $article;
     }
 
     function getByUsername($username) {
-        $query = $this->db->prepare("SELECT * FROM account WHERE username = :username");
+        $query = $this->db->prepare("SELECT * FROM article WHERE username = :username");
         $query->bindValue(':username', $username);
         $query->execute();
-        $account_from_sql = $query->fetch(PDO::FETCH_ASSOC);
-        $account = new Account();
-        $account->hydrate($account_from_sql);
-        return $account;
+        $article_from_sql = $query->fetch(PDO::FETCH_ASSOC);
+        $article = new article();
+        $article->hydrate($article_from_sql);
+        return $article;
     }
 
     function getByEmail($email) {
-        $query = $this->db->prepare("SELECT * FROM account WHERE email = :email");
+        $query = $this->db->prepare("SELECT * FROM article WHERE email = :email");
         $query->bindValue(':email', $email);
         $query->execute();
-        $account_from_sql = $query->fetch(PDO::FETCH_ASSOC);
-        $account = new Account();
-        $account->hydrate($account_from_sql);
-        return $account;
+        $article_from_sql = $query->fetch(PDO::FETCH_ASSOC);
+        $article = new article();
+        $article->hydrate($article_from_sql);
+        return $article;
     }
 
-    function addAccount($username, $password, $email){
+    function addarticle($username, $password, $email){
         $creation_date = date('Y/m/d H:i:s');
-        $query = $this->db->prepare("INSERT INTO account (username, password, email, creation_date, is_admin) VALUES (:username, :password, :email, :creation_date, 0)");
+        $query = $this->db->prepare("INSERT INTO article (username, password, email, creation_date, is_admin) VALUES (:username, :password, :email, :creation_date, 0)");
         $query->bindValue(':username', $username);
         $query->bindValue(':password', $password);
         $query->bindValue(':email', $email);
@@ -48,9 +48,9 @@ class ArticleManager extends Manager {
     }
 
 
-    function addAdminAccount($username, $password, $email){
+    function addAdminarticle($username, $password, $email){
         $creation_date = date('Y/m/d H:i:s');
-        $query = $this->db->prepare("INSERT INTO account (username, password, email, creation_date, is_admin) VALUES (:username, :password, :email, :creation_date, 1)");
+        $query = $this->db->prepare("INSERT INTO article (username, password, email, creation_date, is_admin) VALUES (:username, :password, :email, :creation_date, 1)");
         $query->bindValue(':username', $username);
         $query->bindValue(':password', $password);
         $query->bindValue(':email', $email);
@@ -60,8 +60,8 @@ class ArticleManager extends Manager {
     }
 
 
-    function deleteAccount($username, $email){
-        $query = $this->db->prepare("DELETE FROM account WHERE email=:email AND username=:username");
+    function deletearticle($username, $email){
+        $query = $this->db->prepare("DELETE FROM article WHERE email=:email AND username=:username");
         $query->bindValue(':username', $username);
         $query->bindValue(':email', $email);
         $query->execute();
@@ -69,32 +69,32 @@ class ArticleManager extends Manager {
     }
 
 
-    function updateAccount_password($id_user, $changed_value){
-        $query = $this->db->prepare("UPDATE account SET password=:changed_value WHERE id_user=:id_user");
-        $query->bindValue(':id_user', $id_user);
+    function updatearticle_password($id_article, $changed_value){
+        $query = $this->db->prepare("UPDATE article SET password=:changed_value WHERE id_article=:id_article");
+        $query->bindValue(':id_article', $id_article);
         $query->bindValue(':changed_value', $changed_value);
         $query->execute();
 
     }
 
-    function updateAccount_username($id_user, $changed_value){
-        $query = $this->db->prepare("UPDATE account SET username=:changed_value WHERE id_user=:id_user");
-        $query->bindValue(':id_user', $id_user);
+    function updatearticle_username($id_article, $changed_value){
+        $query = $this->db->prepare("UPDATE article SET username=:changed_value WHERE id_article=:id_article");
+        $query->bindValue(':id_article', $id_article);
         $query->bindValue(':changed_value', $changed_value);
         $query->execute();
 
     }
 
-    function updateAccount_email($id_user, $changed_value){
-        $query = $this->db->prepare("UPDATE account SET email=:changed_value WHERE id_user=:id_user");
-        $query->bindValue(':id_user', $id_user);
+    function updatearticle_email($id_article, $changed_value){
+        $query = $this->db->prepare("UPDATE article SET email=:changed_value WHERE id_article=:id_article");
+        $query->bindValue(':id_article', $id_article);
         $query->bindValue(':changed_value', $changed_value);
         $query->execute();
 
     }
     
-    function isAccountValid($username, $email) {
-        $query = $this->db->prepare("SELECT * FROM account WHERE username=:username OR email=:email");
+    function isarticleValid($username, $email) {
+        $query = $this->db->prepare("SELECT * FROM article WHERE username=:username OR email=:email");
         $query->bindValue(':username', $username);
         $query->bindValue(':email', $email);
         $query->execute();
