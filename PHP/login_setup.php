@@ -68,15 +68,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             }    
                         } else{
                             // Display an error message if password is not valid
-                            $password_err = "The password you entered was not valid.";
+                            $password_err = "Le mot de passe que vous avez saisi n'était pas valide.";
                         }
                     }
                 } else{
                     // Display an error message if username doesn't exist
-                    $username_err = "No account found with that username.";
+                    $username_err = "Aucun compte trouvé avec ce nom d'utilisateur.";
                 }
             } else{
-                echo "Oops! Something went wrong. Please try again later.";
+                echo "Oups ! Quelque chose a mal c'est passer. Veuillez réessayer plus tard.";
             }
 
             // Close statement
