@@ -1,5 +1,9 @@
 <?php
 
-var_dump($_POST);
+
+require_once "init.php";
+
+var_dump($ArticleManager-> getByName_Category("Toy"));
+
 
 ?>
