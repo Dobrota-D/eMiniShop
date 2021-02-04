@@ -8,6 +8,16 @@ class ArticleManager extends Manager {
 
     //getBy article and category section
 
+
+    function getAll_Article() {
+        $query = $this->db->prepare("SELECT * FROM article");
+        $query->execute();
+        $articles_from_sql = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $articles_from_sql;
+    }
+
+
+
     function getById_Article($id_article) {
         $query = $this->db->prepare("SELECT * FROM article WHERE id_article = :id_article");
         $query->bindValue(':id_article', $id_article);
@@ -22,7 +32,7 @@ class ArticleManager extends Manager {
         $query->bindValue(':name_article', $name_article);
         $query->execute();
         $article_from_sql = $query->fetch(PDO::FETCH_ASSOC);
-        $article = new article();
+        $article = new Article();
         $article->hydrate($article_from_sql);
         return $article;
     }
@@ -32,7 +42,7 @@ class ArticleManager extends Manager {
         $query->bindValue(':id_category', $id_category);
         $query->execute();
         $category_from_sql = $query->fetch(PDO::FETCH_ASSOC);
-        $category = new category();
+        $category = new Category();
         $category->hydrate($category_from_sql);
         return $category;
     }
@@ -42,15 +52,18 @@ class ArticleManager extends Manager {
         $query->bindValue(':name_category', $name_category);
         $query->execute();
         $category_from_sql = $query->fetch(PDO::FETCH_ASSOC);
-        $category = new category();
+        $category = new Category();
         $category->hydrate($category_from_sql);
         return $category;
     }
 
+    
+
 //article additions section
-    function addArticle($name_article, $price_article, $quantity_article){
-        $query = $this->db->prepare("INSERT INTO article (name_article, price_article, quantity_article, creation_date) VALUES (:name_article, :price_article, :quantity_article)");
+    function addArticle($name_article, $description_article, $quantity_article, $price_article){
+        $query = $this->db->prepare("INSERT INTO article (name_article, description_article, quantity_article, price_article) VALUES (:name_article, :description_article, :quantity_article, :price_article)");
         $query->bindValue(':name_article', $name_article);
+        $query->bindValue(':description_article', $description_article);
         $query->bindValue(':price_article', $price_article);
         $query->bindValue(':quantity_article', $quantity_article);
         $query->execute();
@@ -58,7 +71,7 @@ class ArticleManager extends Manager {
     }
 
     function addPriceArticle($name_article, $price_article, $quantity_article){
-        $query = $this->db->prepare("INSERT INTO article (name_article, price_article, quantity_article, creation_date) VALUES (:name_article, :price_article, :quantity_article)");
+        $query = $this->db->prepare("INSERT INTO article (name_article, price_article, quantity_article) VALUES (:name_article, :price_article, :quantity_article)");
         $query->bindValue(':name_article', $name_article);
         $query->bindValue(':price_article', $price_article);
         $query->bindValue(':quantity_article', $quantity_article);
@@ -75,7 +88,7 @@ class ArticleManager extends Manager {
     }
 
 //article feature section 
-    function deletearticle($name_article, $quantity_article){
+    function deleteArticle($name_article, $quantity_article){
         $query = $this->db->prepare("DELETE FROM article WHERE quantity_article=:quantity_article AND name_article=:name_article");
         $query->bindValue(':name_article', $name_article);
         $query->bindValue(':quantity_article', $quantity_article);
@@ -83,7 +96,7 @@ class ArticleManager extends Manager {
 
     }
 
-    function updatearticle($id_article, $changed_value){
+    function updateArticle($id_article, $changed_value){
         $query = $this->db->prepare("UPDATE article SET price_article=:changed_value WHERE id_article=:id_article");
         $query->bindValue(':id_article', $id_article);
         $query->bindValue(':changed_value', $changed_value);
@@ -99,7 +112,7 @@ class ArticleManager extends Manager {
 
     }
 
-    function updatearticle_quantity_article($id_article, $changed_value){
+    function updateArticle_quantity_article($id_article, $changed_value){
         $query = $this->db->prepare("UPDATE article SET quantity_article=:changed_value WHERE id_article=:id_article");
         $query->bindValue(':id_article', $id_article);
         $query->bindValue(':changed_value', $changed_value);
@@ -107,7 +120,7 @@ class ArticleManager extends Manager {
 
     }
     
-    function isarticleValid($name_article, $quantity_article) {
+    function isrticleValid($name_article, $quantity_article) {
         $query = $this->db->prepare("SELECT * FROM article WHERE name_article=:name_article OR quantity_article=:quantity_article");
         $query->bindValue(':name_article', $name_article);
         $query->bindValue(':quantity_article', $quantity_article);

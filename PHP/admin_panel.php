@@ -63,8 +63,19 @@ if (!empty($_POST['username']) && !empty($_POST['email']) && !empty( $_POST['pas
     $username = $_POST['username'];
     $email = $_POST['email'];
     $password = $_POST['password'];
+    if ($AccountManager->isAccountValid($username, $email))
     $AccountManager->addAccount($username, $password, $email);
     $_SESSION['account_created'] = "Your account have been created";
+    header('Location: ../public/admin.php');
+    
+}
+
+
+if (!empty($_POST['delete_username']) && !empty($_POST['delete_email'])){
+    $username = $_POST['delete_username'];
+    $email = $_POST['delete_email'];
+    $AccountManager->deleteAccount($username, $email);
+    $_SESSION['account_deleted'] = "The account Username: $username bound to mail: $email has been deleted";
     header('Location: ../public/admin.php');
     
 }
