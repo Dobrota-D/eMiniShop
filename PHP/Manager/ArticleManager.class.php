@@ -16,7 +16,13 @@ class ArticleManager extends Manager {
         return $articles_from_sql;
     }
 
-
+    function getArticleByCategoryName($category_name){
+        $query = $this->db->prepare("SELECT * FROM article WHERE category_article = :category_name");
+        $query->bindValue(':category_name', $category_name);
+        $query->execute();
+        $articles_from_sql = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $articles_from_sql;
+    }
 
     function getById_Article($id_article) {
         $query = $this->db->prepare("SELECT * FROM article WHERE id_article = :id_article");

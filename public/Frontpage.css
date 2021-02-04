@@ -1,0 +1,27 @@
+body {
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    
+}
+.artciles-big-container {
+    display: inline-flex;
+    width: 80%;
+    height: 100vh;
+    
+}
+.article-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px;
+}
+p {
+    margin: 3px 0;
+}
+.cart-container {
+    display: inline-flex;
+    width: 19%;
+    height: 100vh;
+    border-left: 1% solid black;
+}
