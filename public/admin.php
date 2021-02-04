@@ -28,6 +28,23 @@
     </form>
     <br />
     <br />
+
+    <?php
+        if (isset($_SESSION['account_deleted'])) {
+    ?>        
+            <div><?php echo $_SESSION['account_deleted'];?></div>
+    <?php
+        unset($_SESSION['account_deleted']);     
+        }
+    ?>
+    <form action="../PHP/admin_panel.php" method="POST">
+            <input type="email" name="delete_email" placeholder="Email"><br />
+            <input type="text" name="delete_username" placeholder="Username"><br />
+            <button type="submit">Delete account</button>
+    </form>
+    <br />
+    <br />
+
     <?php
         if (isset($_SESSION['username_modified'])) {
     ?>        
