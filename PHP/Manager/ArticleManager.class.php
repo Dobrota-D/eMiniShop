@@ -1,13 +1,14 @@
 <?php
 require_once "Manager.class.php";
 
-
 class ArticleManager extends Manager {
     function __construct($db) {
         parent::__construct($db);
     }
 
-    function getById($id_article) {
+    //getBy article and category section
+
+    function getById_Article($id_article) {
         $query = $this->db->prepare("SELECT * FROM article WHERE id_article = :id_article");
         $query->bindValue(':id_article', $id_article);
         $query->execute();
@@ -16,9 +17,9 @@ class ArticleManager extends Manager {
         return $article;
     }
 
-    function getByUsername($username) {
-        $query = $this->db->prepare("SELECT * FROM article WHERE username = :username");
-        $query->bindValue(':username', $username);
+    function getByName_Article($name_article) {
+        $query = $this->db->prepare("SELECT * FROM article WHERE name_article = :name_article");
+        $query->bindValue(':name_article', $name_article);
         $query->execute();
         $article_from_sql = $query->fetch(PDO::FETCH_ASSOC);
         $article = new article();
@@ -26,77 +27,90 @@ class ArticleManager extends Manager {
         return $article;
     }
 
-    function getByEmail($email) {
-        $query = $this->db->prepare("SELECT * FROM article WHERE email = :email");
-        $query->bindValue(':email', $email);
+    function getById_Category($id_category) {
+        $query = $this->db->prepare("SELECT * FROM category WHERE id_category = :id_category");
+        $query->bindValue(':id_category', $id_category);
         $query->execute();
-        $article_from_sql = $query->fetch(PDO::FETCH_ASSOC);
-        $article = new article();
-        $article->hydrate($article_from_sql);
-        return $article;
+        $category_from_sql = $query->fetch(PDO::FETCH_ASSOC);
+        $category = new category();
+        $category->hydrate($category_from_sql);
+        return $category;
     }
 
-    function addarticle($username, $password, $email){
-        $creation_date = date('Y/m/d H:i:s');
-        $query = $this->db->prepare("INSERT INTO article (username, password, email, creation_date, is_admin) VALUES (:username, :password, :email, :creation_date, 0)");
-        $query->bindValue(':username', $username);
-        $query->bindValue(':password', $password);
-        $query->bindValue(':email', $email);
-        $query->bindValue(':creation_date', $creation_date);
+    function getByName_Category($name_category) {
+        $query = $this->db->prepare("SELECT * FROM category WHERE name_category = :name_category");
+        $query->bindValue(':name_category', $name_category);
         $query->execute();
-
+        $category_from_sql = $query->fetch(PDO::FETCH_ASSOC);
+        $category = new category();
+        $category->hydrate($category_from_sql);
+        return $category;
     }
 
-
-    function addAdminarticle($username, $password, $email){
-        $creation_date = date('Y/m/d H:i:s');
-        $query = $this->db->prepare("INSERT INTO article (username, password, email, creation_date, is_admin) VALUES (:username, :password, :email, :creation_date, 1)");
-        $query->bindValue(':username', $username);
-        $query->bindValue(':password', $password);
-        $query->bindValue(':email', $email);
-        $query->bindValue(':creation_date', $creation_date);
+//article additions section
+    function addArticle($name_article, $price_article, $quantity_article){
+        $query = $this->db->prepare("INSERT INTO article (name_article, price_article, quantity_article, creation_date) VALUES (:name_article, :price_article, :quantity_article)");
+        $query->bindValue(':name_article', $name_article);
+        $query->bindValue(':price_article', $price_article);
+        $query->bindValue(':quantity_article', $quantity_article);
         $query->execute();
 
     }
 
-
-    function deletearticle($username, $email){
-        $query = $this->db->prepare("DELETE FROM article WHERE email=:email AND username=:username");
-        $query->bindValue(':username', $username);
-        $query->bindValue(':email', $email);
+    function addPriceArticle($name_article, $price_article, $quantity_article){
+        $query = $this->db->prepare("INSERT INTO article (name_article, price_article, quantity_article, creation_date) VALUES (:name_article, :price_article, :quantity_article)");
+        $query->bindValue(':name_article', $name_article);
+        $query->bindValue(':price_article', $price_article);
+        $query->bindValue(':quantity_article', $quantity_article);
         $query->execute();
 
     }
 
+    function addName_Category($name_category, $id_category){
+        $query = $this->db->prepare("INSERT INTO category (name_category, id_category) VALUES (:name_category, :id_category)");
+        $query->bindValue(':name_category', $name_category);
+        $query->bindValue(':id_category', $id_category);
+        $query->execute();
 
-    function updatearticle_password($id_article, $changed_value){
-        $query = $this->db->prepare("UPDATE article SET password=:changed_value WHERE id_article=:id_article");
+    }
+
+//article feature section 
+    function deletearticle($name_article, $quantity_article){
+        $query = $this->db->prepare("DELETE FROM article WHERE quantity_article=:quantity_article AND name_article=:name_article");
+        $query->bindValue(':name_article', $name_article);
+        $query->bindValue(':quantity_article', $quantity_article);
+        $query->execute();
+
+    }
+
+    function updatearticle($id_article, $changed_value){
+        $query = $this->db->prepare("UPDATE article SET price_article=:changed_value WHERE id_article=:id_article");
         $query->bindValue(':id_article', $id_article);
         $query->bindValue(':changed_value', $changed_value);
         $query->execute();
 
     }
 
-    function updatearticle_username($id_article, $changed_value){
-        $query = $this->db->prepare("UPDATE article SET username=:changed_value WHERE id_article=:id_article");
+    function update_name_article($id_article, $changed_value){
+        $query = $this->db->prepare("UPDATE article SET name_article=:changed_value WHERE id_article=:id_article");
         $query->bindValue(':id_article', $id_article);
         $query->bindValue(':changed_value', $changed_value);
         $query->execute();
 
     }
 
-    function updatearticle_email($id_article, $changed_value){
-        $query = $this->db->prepare("UPDATE article SET email=:changed_value WHERE id_article=:id_article");
+    function updatearticle_quantity_article($id_article, $changed_value){
+        $query = $this->db->prepare("UPDATE article SET quantity_article=:changed_value WHERE id_article=:id_article");
         $query->bindValue(':id_article', $id_article);
         $query->bindValue(':changed_value', $changed_value);
         $query->execute();
 
     }
     
-    function isarticleValid($username, $email) {
-        $query = $this->db->prepare("SELECT * FROM article WHERE username=:username OR email=:email");
-        $query->bindValue(':username', $username);
-        $query->bindValue(':email', $email);
+    function isarticleValid($name_article, $quantity_article) {
+        $query = $this->db->prepare("SELECT * FROM article WHERE name_article=:name_article OR quantity_article=:quantity_article");
+        $query->bindValue(':name_article', $name_article);
+        $query->bindValue(':quantity_article', $quantity_article);
         $query->execute();
 
         $data = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -110,9 +124,23 @@ class ArticleManager extends Manager {
     }
 
 
+    //category
+    function deleteName_Category($name_category){
+        $query = $this->db->prepare("DELETE FROM category WHERE name_category=:name_category AND name_article=:name_article");
+        $query->bindValue(':name_category', $name_category);
+        $query->execute();
 
-    
-    
+    }
+
+    function updateName_Category($Name_Category, $changed_value){
+        $query = $this->db->prepare("UPDATE category SET name_category=:changed_value WHERE name_category=:name_category");
+        $query->bindValue(':name_category', $name_category);
+        $query->bindValue(':changed_value', $changed_value);
+        $query->execute();
+
+    }
+
+ 
 
     
 
