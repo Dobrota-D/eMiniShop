@@ -38,6 +38,7 @@ class AccountManager extends Manager {
 
     function addAccount($username, $password, $email){
         $creation_date = date('Y/m/d H:i:s');
+        $password = password_hash($password, $PASSWORD_DEFAULT);
         $query = $this->db->prepare("INSERT INTO account (username, password, email, creation_date, is_admin) VALUES (:username, :password, :email, :creation_date, 0)");
         $query->bindValue(':username', $username);
         $query->bindValue(':password', $password);
@@ -69,28 +70,27 @@ class AccountManager extends Manager {
     }
 
 
-    function updateAccount_password($id_user, $changed_value){
-        $query = $this->db->prepare("UPDATE account SET password=:changed_value WHERE id_user=:id_user");
-        $query->bindValue(':id_user', $id_user);
+    function updateAccount_password_from_username($username, $changed_value){
+        $query = $this->db->prepare("UPDATE account SET password=:changed_value WHERE username=:username");
+        $query->bindValue(':username', $username);
         $query->bindValue(':changed_value', $changed_value);
         $query->execute();
 
     }
 
-    function updateAccount_username($id_user, $changed_value){
-        $query = $this->db->prepare("UPDATE account SET username=:changed_value WHERE id_user=:id_user");
-        $query->bindValue(':id_user', $id_user);
+    function updateAccount_username_from_email($email, $changed_value){
+        $query = $this->db->prepare("UPDATE account SET username=:changed_value WHERE email=:email");
+        $query->bindValue(':email', $email);
         $query->bindValue(':changed_value', $changed_value);
         $query->execute();
 
     }
 
-    function updateAccount_email($id_user, $changed_value){
-        $query = $this->db->prepare("UPDATE account SET email=:changed_value WHERE id_user=:id_user");
-        $query->bindValue(':id_user', $id_user);
+    function updateAccount_email_from_username($username, $changed_value){
+        $query = $this->db->prepare("UPDATE account SET email=:changed_value WHERE username=:username");
+        $query->bindValue(':username', $username);
         $query->bindValue(':changed_value', $changed_value);
         $query->execute();
-
     }
     
     function isAccountValid($username, $email) {
