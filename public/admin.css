@@ -1,6 +1,8 @@
 body {
-    background-color: powderblue;
+    background-color: cornsilk;
 }
 
-
-
+#barre_nav{
+    height: 6em;
+    margin-bottom: 20px;
+}

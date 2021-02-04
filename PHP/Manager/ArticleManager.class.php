@@ -87,11 +87,14 @@ class ArticleManager extends Manager {
 
     }
 
+
+
+
+
 //article feature section 
-    function deleteArticle($name_article, $quantity_article){
-        $query = $this->db->prepare("DELETE FROM article WHERE quantity_article=:quantity_article AND name_article=:name_article");
+    function deleteArticle($name_article){
+        $query = $this->db->prepare("DELETE FROM article WHERE name_article=:name_article");
         $query->bindValue(':name_article', $name_article);
-        $query->bindValue(':quantity_article', $quantity_article);
         $query->execute();
 
     }
