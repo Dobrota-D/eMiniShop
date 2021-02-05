@@ -9,17 +9,29 @@ require_once "../PHP/init.php";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Résumé</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin-left: 30px;
+        }
+        h1 {
+            font-size: 20px;
+            margin: 50px 0px;
+        }
+        .article {
+            margin: 10px 0;
+        }
+        .article span {
+            margin-left: 10px;
+        }
+    </style>
 </head>
 <body>
-    <p>Voici un résumé de votre panier</p>
+    <h1>Résumé de votre panier</h1>
     <?php
-    for ($i=0; $i < count($_SESSION['panier']) ; $i++) {  ?>
-        <p style="display:inline; margin-right:5px"><?php echo $_SESSION['panier'][$i][0] ?></p>
-        <p style="display:inline"><?php echo $_SESSION['panier'][$i][1] . '€' ?></p><br />
-        <?php
-        
+    for ($i=0; $i < count($_SESSION['panier']) ; $i++) {
+        echo '<p class="article"> - '.$_SESSION['panier'][$i][0].'<span>'.$_SESSION['panier'][$i][1].'€</span></p>';
     }
-
     ?>
         <form action="../PHP/panier.php" method="POST">
             <input type="hidden" value="vide le panier" name="empty_cart">
