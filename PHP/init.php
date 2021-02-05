@@ -8,3 +8,4 @@ require_once "Objects/Account.class.php";
 
 $AccountManager = new AccountManager($bdd);
 $ArticleManager = new ArticleManager($bdd);
+$panier = [];

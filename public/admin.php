@@ -1,5 +1,5 @@
 <?php
-    session_start();
+    require_once "../PHP/init.php";
     if ((!$_SESSION["loggedin"]) || ($_SESSION['is_admin'] != 1)){
         header('Location: login.php');
 
@@ -19,28 +19,19 @@
     <title>Hello, world!</title>
   </head>
   <body>
-        <?php
-            if (isset($_SESSION['account_created'])) {
-        ?>        
-            <div><?php echo $_SESSION['account_created'];?></div>
-        <?php
-            unset($_SESSION['account_created']);     
-            }
-        ?>
-        
+      
 
         <nav class="navbar navbar-expand-lg navbar-light bg-light" id="barre_nav">
             <div class="container-fluid">
-              <a class="navbar-brand" href="#">Navbar</a>
+              <a class="navbar-brand" href="#">Bar d'administration</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
               <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                  <a class="nav-link active" aria-current="page" href="#">Home</a>
-                  <a class="nav-link" href="#">Features</a>
-                  <a class="nav-link" href="#">Pricing</a>
-                  <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                  <a class="nav-link active" aria-current="page" href="#">Accueil</a>
+                  <a class="nav-link" href="#Account">Account_manager</a>
+                  <a class="nav-link" href="#Article">Article_manager</a>
                 </div>
               </div>
             </div>
@@ -48,109 +39,152 @@
         </nav>
 
 
-        <div class="container">
-            <form action="../PHP/admin_panel/admin_account_panel.php" method="POST">
-                <div class="form-col">
-                    
-                        <input type="email" name="email" placeholder="Email" class="form-control w-25">
-                       
-                    
-                        <input type="text" name="username" placeholder="Username" class="form-control w-25">
-                   
-                    
-                    <input type="password" name="password" placeholder="Password" class="form-control w-25">
-                </div>
-                <button type="submit" class="btn btn-outline-primary">Add account</button>
-            </form>
-            <br />
-            <br />
+        <div class="big_box">
+            <div class="small_box pretty_box sketchy">
+                <?php
+                    if (isset($_SESSION['account_created'])) {
+                ?>        
+                    <div><?php echo $_SESSION['account_created'];?></div>
+                <?php
+                    unset($_SESSION['account_created']);     
+                    }
+                ?>
+            
+                <form action="../PHP/admin_panel/admin_account_panel.php" method="POST">
+                    <div class="form-col">
+                        <input type="email" name="email" placeholder="Email" class="form-control">
+                        <input type="text" name="username" placeholder="Username" class="form-control">
+                        <input type="password" name="password" placeholder="Password" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-outline-primary">Add account</button>
+                </form>
+                <br />
+                
+            
+
+                <?php
+                    if (isset($_SESSION['account_deleted'])) {
+                ?>        
+                    <div><?php echo $_SESSION['account_deleted'];?></div>
+                <?php
+                    unset($_SESSION['account_deleted']);     
+                    }
+                ?>
+                <form action="../PHP/admin_panel/admin_account_panel.php" method="POST">
+                    <div class="form-col">
+                        <input type="email" name="delete_email" placeholder="Email" class="form-control">
+                        <input type="text" name="delete_username" placeholder="Username" class="form-control">
+                    </div>    
+                    <button type="submit"  class="btn btn-outline-primary">Delete account   </button>
+                </form>
+                <br />
+                
+
+                <?php
+                    if (isset($_SESSION['username_modified'])) {
+                ?>        
+                    <div><?php echo $_SESSION['username_modified'];?></div>
+                <?php
+                    unset($_SESSION['username_modified']);     
+                    }
+                ?>
+                <form action="../PHP/admin_panel/admin_account_panel.php" method="POST">
+                    <div class="form-col">
+                        <input type="email" name="mod_email" placeholder="Account Email" class="form-control">
+                        <input type="text" name="mod_username" placeholder="New Username" class="form-control">
+                    </div>    
+                    <button type="submit" class="btn btn-outline-primary">Modify user from account</button>
+                </form>    
+                <br />
+            
+                <?php
+                    if (isset($_SESSION['email_modified'])) {
+                ?>        
+                    <div><?php echo $_SESSION['email_modified'];?></div>
+                <?php
+                    unset($_SESSION['email_modified']);     
+                    }
+                ?>
+                <form action="../PHP/admin_panel/admin_account_panel.php" method="POST">
+                    <div class="form-col">
+                        <input type="test" name="mod_username2" placeholder="Account Username" class="form-control">
+                        <input type="email" name="mod_email2" placeholder="New Email" class="form-control">
+                    </div>    
+                    <button type="submit" class="btn btn-outline-primary">Modify email from account</button>
+                </form> 
+            </div>
+            
+            <div class="small_box pretty_box">
+                <?php
+                    if (isset($_SESSION['article_added'])) {
+                ?>        
+                    <div><?php echo $_SESSION['article_added'];?></div>
+                <?php
+                    unset($_SESSION['article_added']);     
+                    }
+                ?>
+                <form action="../PHP/admin_panel/admin_article_panel.php" method="POST">
+                    <div class="form-col">
+                        <input type="text" name="name_article" placeholder="article name" class="form-control">
+                        <input type="text" name="description_article" placeholder="article description" class="form-control">
+                        <input type="text" name="quantity_article" placeholder="article quantity" class="form-control">
+                        <input type="text" name="price_article" placeholder="article price" class="form-control">
+                        <input type="text" name="category_article" placeholder="article category" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-outline-primary">Add Article</button>
+                </form>
+                <br />
+               
+
+                <?php
+                    if (isset($_SESSION['article_removed'])) {
+                ?>        
+                    <div><?php echo $_SESSION['article_removed'];?></div>
+                <?php
+                    unset($_SESSION['article_removed']);     
+                    }
+                ?>
+                <form action="../PHP/admin_panel/admin_article_panel.php" method="POST">
+                    <div class="form-col">
+                        <input type="text" name="rm_name_article" placeholder="article name" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-outline-primary">Remove Article</button>
+                </form>
+            </div>  
         </div>
+
+        <div class="product_container">
+        <?php
+            $sql = "SELECT * FROM article";
+            $stmt = $bdd->prepare($sql);
+            $stmt->execute();
+            while($articles = $stmt->fetch(PDO::FETCH_ASSOC)){
+                $article_name = $articles["name_article"];
+                $article_description = $articles["description_article"];
+                $article_price = $articles["price_article"];
+                $article_category = $articles["category_article"];
+                $article_image = $articles["image"] ?>
+                    <div class="product pretty_box">
+                        <img class="product_image" src="assets/<?php echo $article_image ?>" alt="<?php echo $article_image?>">
+                        <p>Article : <?php echo $article_name ?> || Price : <?php echo $article_price ?> euros  || Category : <?php echo $article_category ?> </p>
+                        <p>Description : <?php echo $article_description ?></p>
+                            <form action="../PHP/admin_panel/admin_article_panel.php" methode="POST">   
+                                <input type="text" name="remove_article" value="<?php echo $article_name ?>">
+                                <button type="submit" class="btn btn-outline-primary">Delete Article</button>
+                            </form>
+
+                    </div>    
+            <?php
+            }
+            ?>    
+        </div>
+
+
+
+
+        
         
 
-        <?php
-            if (isset($_SESSION['account_deleted'])) {
-        ?>        
-            <div><?php echo $_SESSION['account_deleted'];?></div>
-        <?php
-            unset($_SESSION['account_deleted']);     
-            }
-        ?>
-        <form action="../PHP/admin_panel/admin_account_panel.php" method="POST">
-            <div class="form-row">
-                <div class="col">
-                    <input type="email" name="delete_email" placeholder="Email" class="form-control">
-                </div>    
-                <div class="col">
-                    <input type="text" name="delete_username" placeholder="Username" class="form-control">
-                </div>    
-            <button type="submit"  class="btn btn-outline-primary">Delete account</button>
-        </form>
-        <br />
-        <br />
-
-        <?php
-            if (isset($_SESSION['username_modified'])) {
-        ?>        
-            <div><?php echo $_SESSION['username_modified'];?></div>
-        <?php
-            unset($_SESSION['username_modified']);     
-            }
-        ?>
-        <form action="../PHP/admin_panel/admin_account_panel.php" method="POST">
-            <input type="email" name="mod_email" placeholder="Account Email"><br />
-            <input type="text" name="mod_username" placeholder="New Username"><br />
-            <button type="submit">Modify username from account</button>
-        </form>    
-
-        <br />
-        <br />
-        <?php
-            if (isset($_SESSION['email_modified'])) {
-        ?>        
-            <div><?php echo $_SESSION['email_modified'];?></div>
-        <?php
-            unset($_SESSION['email_modified']);     
-            }
-        ?>
-        <form action="../PHP/admin_panel/admin_account_panel.php" method="POST">
-            <input type="test" name="mod_username2" placeholder="Account Username"><br />
-            <input type="email" name="mod_email2" placeholder="New Email"><br />
-            <button type="submit">Modify email from account</button>
-        </form>    
-
-
-
-        <?php
-            if (isset($_SESSION['article_added'])) {
-        ?>        
-            <div><?php echo $_SESSION['article_added'];?></div>
-        <?php
-            unset($_SESSION['article_added']);     
-            }
-        ?>
-        <form action="../PHP/admin_panel/admin_article_panel.php" method="POST">
-            <input type="text" name="name_article" placeholder="article name"><br />
-            <input type="text" name="description_article" placeholder="article description"><br />
-            <input type="text" name="quantity_article" placeholder="article quantity"><br />
-            <input type="text" name="price_article" placeholder="article price"><br />
-            <input type="text" name="category_article" placeholder="article category"><br />
-            <button type="submit">Add Article</button>
-        </form>
-        <br />
-        <br />
-
-        <?php
-            if (isset($_SESSION['article_removed'])) {
-        ?>        
-            <div><?php echo $_SESSION['article_removed'];?></div>
-        <?php
-            unset($_SESSION['article_removed']);     
-            }
-        ?>
-        <form action="../PHP/admin_panel/admin_article_panel.php" method="POST">
-            <input type="text" name="rm_name_article" placeholder="article name"><br />
-            <button type="submit">Remove Article</button>
-        </form>
 
 
 

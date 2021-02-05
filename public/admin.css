@@ -2,7 +2,49 @@ body {
     background-color: cornsilk;
 }
 
-#barre_nav{
-    height: 6em;
-    margin-bottom: 20px;
+
+
+.big_box{
+    margin: 3em;
+    padding: 1em;
+
+    display: flex;
+    justify-content: space-around;
+    
 }
+
+.small_box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    
+}
+
+.pretty_box {
+    padding: 1rem;
+    width: 420px;
+    box-shadow: 0 15px 30px 0 rgba(0,0,0,0.11),
+      0 5px 15px 0 rgba(0,0,0,0.08);
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    border-left: 0.5em solid #00ff99;
+    
+}
+
+.product_container{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.product_image{
+    max-width: 13em;
+    max-height: 13em;
+}
+
+
+
+  
