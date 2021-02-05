@@ -1,4 +1,6 @@
-
+<?php
+    require_once "../PHP/init.php";
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -29,8 +31,6 @@
         </form>
         <div class="article-container">
         <?php
-            require_once "../PHP/init.php";
-            var_dump($_SESSION);
 
             if (empty($_POST['select'])) {
                 $articles = $ArticleManager-> getAll_Article();
