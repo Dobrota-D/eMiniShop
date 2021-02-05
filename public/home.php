@@ -20,16 +20,19 @@
     <div class="main">
         <form action = "./home.php" method = "POST">
             <select name="select" class="select-form">
-                <option value="" selected disabled hidden>Catégorie</option>
-                <option value="sport">Sport</option>
-                <option value="Toy">Toy</option>
-                <option value="Camera">Camera</option>
+                <?php 
+                    require_once "../PHP/init.php";
+                    $categories = $ArticleManager->getAll_Category();
+
+                    for ($i=0; $i < count($categories); $i++) { 
+                        echo '<option value="'.$categories[$i]['name_category'].'">'.$categories[$i]['name_category'].'</option>';
+                    }
+                ?>
             </select>
             <button type="submit">Appliquer les filtres</button>
         </form>
         <div class="article-container">
         <?php
-            require_once "../PHP/init.php";
             if (empty($_POST['select'])) {
                 $articles = $ArticleManager-> getAll_Article();
                 for ($i=0; $i < count($articles) ; $i++) {

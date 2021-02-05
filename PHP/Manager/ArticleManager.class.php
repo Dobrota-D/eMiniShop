@@ -6,9 +6,8 @@ class ArticleManager extends Manager {
         parent::__construct($db);
     }
 
+
     //getBy article and category section
-
-
     function getAll_Article() {
         $query = $this->db->prepare("SELECT * FROM article");
         $query->execute();
@@ -63,7 +62,12 @@ class ArticleManager extends Manager {
         return $category;
     }
 
-    
+    function getAll_Category() {
+        $query = $this->db->prepare("SELECT name_category FROM category");
+        $query->execute();
+        $category_from_sql = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $category_from_sql;
+    }
 
 //article additions section
     function addArticle($name_article, $description_article, $quantity_article, $price_article){
