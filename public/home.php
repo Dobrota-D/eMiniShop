@@ -12,7 +12,12 @@
 <body style="display: flex;justify-content: center;margin: 0;font-family:sans-serif">
 
     <header>
-        <p style="margin-left:15px">Bonjour, <?php echo $_SESSION['username'] ?></p>
+        <?php if(isset($_SESSION['username'])){
+            ?>
+            <p style="margin-left:15px">Bonjour, <?php echo $_SESSION['username'] ?></p>
+        <?php
+        }
+        ?>
         <div>
             <a href="login.php" class="login-btn">Connexion</a>
             <a href="signupForm.php" class="signup-btn">S'inscrire</a>
@@ -42,7 +47,7 @@
                         </div>
                         <div class="article-card">
                             <p class="article-name" style="font-weight: 600;">'.$articles[$i]['name_article'].'</p>
-                            <p class="article-description" style="opacity: .8;font-size:13px">'.$articles[$i]['description_article'].'</p>
+                            <p class="article-description" style="opacity: .8;font-size:13px">'.substr($articles[$i]['description_article'], 0, 75).'</p>
                             <p class="article-price" style="font-size: 17px;">'.$articles[$i]['price_article'].'€</p>
                             <input type="hidden" name="article" value="'.$articles[$i]['name_article'].'">
                             <button name="'.$articles[$i]['name_article'].'">Ajouter au panier</button>
@@ -61,7 +66,7 @@
                         </div>
                         <div class="article-card">
                             <p class="article-name" style="font-weight: 600;">'.$articles[$i]['name_article'].'</p>
-                            <p class="article-description" style="opacity: .8;font-size:13px">'.$articles[$i]['description_article'].'</p>
+                            <p class="article-description" style="opacity: .8;font-size:13px">'.substr($articles[$i]['description_article'], 0, 35).'</p>
                             <p class="article-price" style="font-size: 17px;">'.$articles[$i]['price_article'].'€</p>
                             <input type="hidden" name="article" value="'.$articles[$i]['name_article'].'">
                             <button name="'.$articles[$i]['name_article'].'">Ajouter au panier</button>

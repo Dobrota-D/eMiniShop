@@ -30,7 +30,7 @@
         $_SESSION["loggedin"] = true;
         $_SESSION["username"] = $_POST['username'];
 
-        header('Location: ../public/Index.php');
+        header('Location: ../public/home.php');
     }
 
 ?>
