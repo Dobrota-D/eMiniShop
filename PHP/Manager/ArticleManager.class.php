@@ -166,7 +166,7 @@ class ArticleManager extends Manager {
         $total = 0;
         $quantity_article = count($_SESSION['panier']['id_article']);
         for($i = 0; $i < $quantity_article; $i++){
-            $total += $_SESSION['panier'][$i] * $_SESSION['panier']['id_article'];
+            $total += $_SESSION['panier']['quantity_article'][$i] * $_SESSION['panier']['price_article'][$i];
         
         }
         return $total;
