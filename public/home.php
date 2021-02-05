@@ -110,8 +110,10 @@
 
         </div>
         <div class="cart-infos" style="position:absolute; bottom:10px;right:10px">
+        <form action="./Invoice.php" method="POST">
             <?php echo "Total panier : " . $ArticleManager->totalCart() . " €" ?> 
-            <button style="height: 30px">Valider mon panier</button>
+            <button type="submit" style="height: 30px">Valider mon panier</button>
+        </from>    
         </div>
 
         
