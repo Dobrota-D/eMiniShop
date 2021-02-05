@@ -21,18 +21,29 @@
         <div class="article-container">
         <?php
             require_once "../PHP/init.php";
+            var_dump($_SESSION);
+
             if (empty($_POST['select'])) {
                 $articles = $ArticleManager-> getAll_Article();
                 for ($i=0; $i < count($articles) ; $i++) {
                     echo
-                    '<form method="POST" style="display:inline">
-                    <div class="article-card" style="min-width: 200px; min-height: 40px; border: 1px solid grey; border-radius: 7px; margin: 10px; padding: 6px; display: inline-flex; flex-direction: column; justify-content: space-around; align-items: flex-start">
-                        <p class="article-name" style="font-weight: 600">'.$articles[$i]['name_article'].'</p>
-                        <p class="article-description" style="opacity: .8">'.$articles[$i]['description_article'].'</p>
-                        <p class="article-price" style="font-size: 17px">'.$articles[$i]['price_article'].'€</p>
-                        <input type="hidden" name="article" value="'.$articles[$i]['name_article'].'">
-                        <button type="submit"> Ajouter au panier</button>
+                    '<div class="card" style="width: 18rem;">
+                            <img src="assets/lego.jpg" class="card-img-top image_card" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the cards content.</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
                     </div>
+                    <form method="POST" style="display:inline">
+                        <div class="article-card" style="min-width: 200px; min-height: 40px; border: 1px solid grey; border-radius: 7px; margin: 10px; padding: 6px; display: inline-flex; flex-direction: column; justify-content: space-around; align-items: flex-start">
+                            <p class="article-name" style="font-weight: 600">'.$articles[$i]['name_article'].'</p>
+                            <p class="article-description" style="opacity: .8">'.$articles[$i]['description_article'].'</p>
+                            <p class="article-price" style="font-size: 17px">'.$articles[$i]['price_article'].'€</p>
+                            <input type="hidden" name="article" value="'.$articles[$i]['name_article'].'">
+                            <button type="submit"> Ajouter au panier</button>
+                        </div>
+                        
                     </form>';
                 }
             }

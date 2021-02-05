@@ -38,7 +38,6 @@
           </nav>
         </nav>
 
-
         <div class="big_box">
             <div class="small_box pretty_box sketchy">
                 <?php
@@ -130,6 +129,8 @@
                         <input type="text" name="quantity_article" placeholder="article quantity" class="form-control">
                         <input type="text" name="price_article" placeholder="article price" class="form-control">
                         <input type="text" name="category_article" placeholder="article category" class="form-control">
+                        <input type="text" name="image_article" placeholder="article image" class="form-control">
+
                     </div>
                     <button type="submit" class="btn btn-outline-primary">Add Article</button>
                 </form>

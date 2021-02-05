@@ -35,3 +35,8 @@ button {
     margin: 5px;
     margin-left: 0;
 }
+
+.image_card{
+    max-width: 35px;
+    max-height: 35px;
+}
