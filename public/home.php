@@ -10,7 +10,7 @@
 <body style="display: flex;justify-content: center;margin: 0;font-family:sans-serif">
 
     <div class="main" style="display: inline-flex;flex-direction:column;width: 80%;height: 98vh;padding-top: 2vh;">
-        <form action = "./Frontpage.php" method = "post">
+        <form action = "./home.php" method = "POST">
             <select name="select">
                 <option value="sport">Sport</option>
                 <option value="Toy">Toy</option>
@@ -21,7 +21,7 @@
         <div class="article-container">
         <?php
             require_once "../PHP/init.php";
-            if (empty($_POST['category'])) {
+            if (empty($_POST['select'])) {
                 $articles = $ArticleManager-> getAll_Article();
                 for ($i=0; $i < count($articles) ; $i++) {
                     echo
