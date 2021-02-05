@@ -19,7 +19,7 @@
             <button type="submit">Appliquer les filtres</button>
         </form>
         <div class="article-container">
-            <?php
+        <?php
             require_once "../PHP/init.php";
 
             if (empty($_POST['category'])) {
