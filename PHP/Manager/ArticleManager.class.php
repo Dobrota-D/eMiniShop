@@ -70,12 +70,14 @@ class ArticleManager extends Manager {
     }
 
 //article additions section
-    function addArticle($name_article, $description_article, $quantity_article, $price_article){
-        $query = $this->db->prepare("INSERT INTO article (name_article, description_article, quantity_article, price_article) VALUES (:name_article, :description_article, :quantity_article, :price_article)");
+    function addArticle($name_article, $description_article, $quantity_article, $price_article, $category_article, $image){
+        $query = $this->db->prepare("INSERT INTO article (name_article, description_article, quantity_article, price_article, category_article, image) VALUES (:name_article, :description_article, :quantity_article, :price_article, :category_article, :image)");
         $query->bindValue(':name_article', $name_article);
         $query->bindValue(':description_article', $description_article);
         $query->bindValue(':price_article', $price_article);
         $query->bindValue(':quantity_article', $quantity_article);
+        $query->bindValue(':category_article', $category_article);
+        $query->bindValue(':image', $image);
         $query->execute();
 
     }

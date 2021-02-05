@@ -20,8 +20,8 @@ function isAdminLoggedIn($SESSION){
 }
 
 
-if (!empty($_POST['name_article']) && !empty($_POST['description_article']) && !empty($_POST['quantity_article']) && !empty($_POST['price_article']) && !empty($_POST['category_article'])){
-    $ArticleManager->addArticle($_POST['name_article'], $_POST['description_article'], $_POST['quantity_article'], $_POST['price_article'], $_POST['category_article']);
+if (!empty($_POST['name_article']) && !empty($_POST['description_article']) && !empty($_POST['quantity_article']) && !empty($_POST['price_article']) && !empty($_POST['category_article']) && !empty($_POST['image_article'])){
+    $ArticleManager->addArticle($_POST['name_article'], $_POST['description_article'], $_POST['quantity_article'], $_POST['price_article'], $_POST['category_article'], $_POST['image_article'] );
     $name_article = $_POST['name_article'];
     $_SESSION['article_added'] = "The article $name_article has been added to the store";
     header('Location: ../../public/admin.php');
