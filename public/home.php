@@ -27,9 +27,7 @@
     <div class="main">
         <form action = "./home.php" method = "POST">
             <select name="select" class="select-form">
-            <option value="" selected disabled hidden>Toutes catégories</option>
                 <?php 
-                    require_once "../PHP/init.php";
                     $categories = $ArticleManager->getAll_Category();
 
                     for ($i=0; $i < count($categories); $i++) { 
