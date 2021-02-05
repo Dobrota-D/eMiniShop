@@ -27,19 +27,11 @@
                     echo
                     '<form method="POST" style="display:inline">
                     <div class="article-card" style="min-width: 200px; min-height: 40px; border: 1px solid grey; border-radius: 7px; margin: 10px; padding: 6px; display: inline-flex; flex-direction: column; justify-content: space-around; align-items: flex-start">
-<<<<<<< HEAD:public/home.php
                         <p class="article-name" style="font-weight: 600">'.$articles[$i]['name_article'].'</p>
                         <p class="article-description" style="opacity: .8">'.$articles[$i]['description_article'].'</p>
                         <p class="article-price" style="font-size: 17px">'.$articles[$i]['price_article'].'€</p>
-                        <input type="text" name="article" value="'.$articles[$i]['name_article'].'">
-                        <button type="submit"> Ajouter au panier</button>
-=======
-                        <p class="article-name" style="font-weight: 600;margin:7px 0;">'.$articles[$i]['name_article'].'</p>
-                        <p class="article-description" style="opacity: .8;margin:7px 0;font-size:13px">'.$articles[$i]['description_article'].'</p>
-                        <p class="article-price" style="font-size: 17px;margin:7px 0;">'.$articles[$i]['price_article'].'€</p>
                         <input type="hidden" name="article" value="'.$articles[$i]['name_article'].'">
-                        <button name="'.$articles[$i]['name_article'].'">Ajouter au panier</button>
->>>>>>> 3f91123992e14fdb4c1ce897031ea6ed243b689c:public/Frontpage.php
+                        <button type="submit"> Ajouter au panier</button>
                     </div>
                     </form>';
                 }
@@ -76,12 +68,12 @@
                     $valeur_article =[$article->name_article, $article->price_article];
                     array_push($_SESSION['panier'], $valeur_article);
                     ?>
-                    '<div class="article-cart-card" style="margin: 5px 0;padding: 7px;">
+                    <div class="article-cart-card" style="margin: 5px 0;padding: 7px;">
                         
                         <?php for ($i=0; $i < count($_SESSION['panier']) ; $i++) { 
                             ?>
                             <p style="display:inline; margin-right:5px"><?php echo $_SESSION['panier'][$i][0] ?></p>
-                            <p style="display:inline"><?php echo $_SESSION['panier'][$i][1] . 'euros' ?></p><br />
+                            <p style="display:inline"><?php echo $_SESSION['panier'][$i][1] . '€' ?></p><br />
                             <?php
                         }
                         ?>
@@ -101,8 +93,10 @@
 
         </div>
         <div class="cart-infos" style="position:absolute; bottom:10px;right:10px">
+            <?php echo "Total panier : " . $ArticleManager->totalCart() . " €" ?> 
             <button style="height: 30px">Valider mon panier</button>
         </div>
+
         
     </div>
 </body>

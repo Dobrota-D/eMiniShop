@@ -164,9 +164,9 @@ class ArticleManager extends Manager {
 
     function totalCart (){
         $total = 0;
-        $quantity_article = count($_SESSION['panier']['id_article']);
+        $quantity_article = count($_SESSION['panier']);
         for($i = 0; $i < $quantity_article; $i++){
-            $total += $_SESSION['panier']['quantity_article'][$i] * $_SESSION['panier']['price_article'][$i];
+            $total += $_SESSION['panier'][$i][1];
         
         }
         return $total;
