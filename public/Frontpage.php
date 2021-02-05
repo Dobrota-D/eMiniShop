@@ -4,9 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Frontpage.css">
     <title>Accueil</title>
 </head>
-<body style="display: flex;justify-content: center;margin: 0;">
+<body style="display: flex;justify-content: center;margin: 0;font-family:sans-serif">
 
     <div class="main" style="display: inline-flex;flex-direction:column;width: 80%;height: 98vh;padding-top: 2vh;">
         <form action = "./Frontpage.php" method = "post">
@@ -25,11 +26,11 @@
                 $articles = $ArticleManager-> getAll_Article();
                 for ($i=0; $i < count($articles) ; $i++) {
                     echo
-                    '<form method="POST">
+                    '<form method="POST" style="display:inline">
                     <div class="article-card" style="min-width: 200px; min-height: 40px; border: 1px solid grey; border-radius: 7px; margin: 10px; padding: 6px; display: inline-flex; flex-direction: column; justify-content: space-around; align-items: flex-start">
-                        <p class="article-name" style="font-weight: 600">'.$articles[$i]['name_article'].'</p>
-                        <p class="article-description" style="opacity: .8">'.$articles[$i]['description_article'].'</p>
-                        <p class="article-price" style="font-size: 17px">'.$articles[$i]['price_article'].'€</p>
+                        <p class="article-name" style="font-weight: 600;margin:7px 0;">'.$articles[$i]['name_article'].'</p>
+                        <p class="article-description" style="opacity: .8;margin:7px 0;font-size:13px">'.$articles[$i]['description_article'].'</p>
+                        <p class="article-price" style="font-size: 17px;margin:7px 0;">'.$articles[$i]['price_article'].'€</p>
                         <input type="hidden" name="article" value="'.$articles[$i]['name_article'].'">
                         <button name="'.$articles[$i]['name_article'].'">Ajouter au panier</button>
                     </div>
@@ -41,11 +42,11 @@
         
                 for ($i=0; $i < count($articles) ; $i++) {
                     echo
-                    '<form method="POST">
+                    '<form method="POST" style="display:inline">
                         <div class="article-card" style="min-width: 200px; min-height: 40px; border: 1px solid grey; border-radius: 7px; margin: 10px; padding: 6px; display: inline-flex; flex-direction: column; justify-content: space-around; align-items: flex-start">
-                            <p class="article-name" style="font-weight: 600">'.$articles[$i]['name_article'].'</p>
-                            <p class="article-description" style="opacity: .8">'.$articles[$i]['description_article'].'</p>
-                            <p class="article-price" style="font-size: 17px">'.$articles[$i]['price_article'].'€</p>
+                            <p class="article-name" style="font-weight: 600;margin:7px 0;">'.$articles[$i]['name_article'].'</p>
+                            <p class="article-description" style="opacity: .8;margin:7px 0;font-size:13px">'.$articles[$i]['description_article'].'</p>
+                            <p class="article-price" style="font-size: 17px;margin:7px 0;">'.$articles[$i]['price_article'].'€</p>
                             <input type="hidden" name="article" value="'.$articles[$i]['name_article'].'">
                             <button name="'.$articles[$i]['name_article'].'">Ajouter au panier</button>
                         </div>
@@ -64,7 +65,6 @@
                     $article = $ArticleManager->getByName_Article($_POST['article']);
                     $valeur_article =[$article->name_article, $article->price_article];
                     array_push($panier, $valeur_article);
-                    var_dump($panier);
 
                     echo
                     '<div class="article-cart-card" style="margin: 5px 0;padding: 7px;">

@@ -25,3 +25,13 @@ p {
     height: 100vh;
     border-left: 1% solid black;
 }
+button {
+    background-color: rgb(62, 133, 199);
+    border: none;
+    color: white;
+    padding: 6px 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+    margin-left: 0;
+}
