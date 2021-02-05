@@ -168,8 +168,8 @@
                         <img class="product_image" src="assets/<?php echo $article_image ?>" alt="<?php echo $article_image?>">
                         <p>Article : <?php echo $article_name ?> || Price : <?php echo $article_price ?> euros  || Category : <?php echo $article_category ?> </p>
                         <p>Description : <?php echo $article_description ?></p>
-                            <form action="../PHP/admin_panel/admin_article_panel.php" methode="POST">   
-                                <input type="text" name="remove_article" value="<?php echo $article_name ?>">
+                            <form action="../PHP/admin_panel/admin_article_panel.php" method="POST">   
+                                <input type="hidden" name="rm_name_article" value="<?php echo $article_name ?>">
                                 <button type="submit" class="btn btn-outline-primary">Delete Article</button>
                             </form>
 

@@ -1,7 +1,6 @@
 <?php
 
     require_once "init.php";
-    $panier = [];
 
     if (isset($_POST['article'])) {
         $article = $ArticleManager->getByName_Article($_POST['article']);
@@ -14,9 +13,20 @@
             <p style="display:inline; margin-right:5px">'.$article->name_article.'</p>
             <p style="display:inline">'.$article->price_article.'€</p>
         </div>';
-        header('Location: ../public/Frontpage.php');
+        header('Location: ../public/home.php');
         
     }
 
+    function emptyCart(){
+        $_SESSION['panier'] = [];
+    }
+    
+    if (isset($_POST['empty_cart'])){
+        emptyCart();
+        header('Location: ../public/home.php');
+
+    }
+
+    var_dump($_POST)
 
 ?>    

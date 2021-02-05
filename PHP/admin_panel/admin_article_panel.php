@@ -18,11 +18,7 @@ function isAdminLoggedIn($SESSION){
         return false;
     }
 }
-function removeArticle($article_name){
-    $ArticleManager->deleteArticle($article_name);
-    header('Location: ../../public/admin.php');
 
-}
 
 if (!empty($_POST['name_article']) && !empty($_POST['description_article']) && !empty($_POST['quantity_article']) && !empty($_POST['price_article']) && !empty($_POST['category_article'])){
     $ArticleManager->addArticle($_POST['name_article'], $_POST['description_article'], $_POST['quantity_article'], $_POST['price_article'], $_POST['category_article']);
