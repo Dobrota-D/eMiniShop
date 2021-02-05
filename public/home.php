@@ -9,9 +9,18 @@
 </head>
 <body style="display: flex;justify-content: center;margin: 0;font-family:sans-serif">
 
-    <div class="main" style="display: inline-flex;flex-direction:column;width: 80%;height: 98vh;padding-top: 2vh;">
-        <form action = "./Frontpage.php" method = "post">
-            <select name="select">
+    <header>
+        <p style="margin-left:15px">Bonjour, <?php echo $_SESSION['username'] ?></p>
+        <div>
+            <a href="login.php" class="login-btn">Connexion</a>
+            <a href="signupForm.php" class="signup-btn">S'inscrire</a>
+        </div>
+    </header>    
+
+    <div class="main">
+        <form action = "./home.php" method = "POST">
+            <select name="select" class="select-form">
+                <option value="" selected disabled hidden>Catégorie</option>
                 <option value="sport">Sport</option>
                 <option value="Toy">Toy</option>
                 <option value="Camera">Camera</option>
@@ -21,18 +30,21 @@
         <div class="article-container">
         <?php
             require_once "../PHP/init.php";
-            if (empty($_POST['category'])) {
+            if (empty($_POST['select'])) {
                 $articles = $ArticleManager-> getAll_Article();
                 for ($i=0; $i < count($articles) ; $i++) {
                     echo
-                    '<form method="POST" style="display:inline">
-                    <div class="article-card" style="min-width: 200px; min-height: 40px; border: 1px solid grey; border-radius: 7px; margin: 10px; padding: 6px; display: inline-flex; flex-direction: column; justify-content: space-around; align-items: flex-start">
-                        <p class="article-name" style="font-weight: 600">'.$articles[$i]['name_article'].'</p>
-                        <p class="article-description" style="opacity: .8">'.$articles[$i]['description_article'].'</p>
-                        <p class="article-price" style="font-size: 17px">'.$articles[$i]['price_article'].'€</p>
-                        <input type="hidden" name="article" value="'.$articles[$i]['name_article'].'">
-                        <button type="submit"> Ajouter au panier</button>
-                    </div>
+                    '<form method="POST" class="form-card">
+                        <div class="img-container">
+                            <img src="./assets/'.$articles[$i]['image'].'" class="card-img-top" alt="'.$articles[$i]['image'].'">
+                        </div>
+                        <div class="article-card">
+                            <p class="article-name" style="font-weight: 600;">'.$articles[$i]['name_article'].'</p>
+                            <p class="article-description" style="opacity: .8;font-size:13px">'.$articles[$i]['description_article'].'</p>
+                            <p class="article-price" style="font-size: 17px;">'.$articles[$i]['price_article'].'€</p>
+                            <input type="hidden" name="article" value="'.$articles[$i]['name_article'].'">
+                            <button name="'.$articles[$i]['name_article'].'">Ajouter au panier</button>
+                        </div>
                     </form>';
                 }
             }
@@ -41,11 +53,14 @@
         
                 for ($i=0; $i < count($articles) ; $i++) {
                     echo
-                    '<form method="POST" style="display:inline">
-                        <div class="article-card" style="min-width: 200px; min-height: 40px; border: 1px solid grey; border-radius: 7px; margin: 10px; padding: 6px; display: inline-flex; flex-direction: column; justify-content: space-around; align-items: flex-start">
-                            <p class="article-name" style="font-weight: 600;margin:7px 0;">'.$articles[$i]['name_article'].'</p>
-                            <p class="article-description" style="opacity: .8;margin:7px 0;font-size:13px">'.$articles[$i]['description_article'].'</p>
-                            <p class="article-price" style="font-size: 17px;margin:7px 0;">'.$articles[$i]['price_article'].'€</p>
+                    '<form method="POST" class="form-card">
+                        <div class="img-container">
+                            <img src="./assets/'.$articles[$i]['image'].'" class="card-img-top" alt="'.$articles[$i]['image'].'">
+                        </div>
+                        <div class="article-card">
+                            <p class="article-name" style="font-weight: 600;">'.$articles[$i]['name_article'].'</p>
+                            <p class="article-description" style="opacity: .8;font-size:13px">'.$articles[$i]['description_article'].'</p>
+                            <p class="article-price" style="font-size: 17px;">'.$articles[$i]['price_article'].'€</p>
                             <input type="hidden" name="article" value="'.$articles[$i]['name_article'].'">
                             <button name="'.$articles[$i]['name_article'].'">Ajouter au panier</button>
                         </div>

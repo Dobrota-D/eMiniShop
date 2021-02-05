@@ -4,6 +4,79 @@ body {
     justify-content: space-between;
     
 }
+header {
+    background-color: rgb(42, 111, 244);
+    position: absolute;
+    color: white;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+}
+header a {
+    font-size: 15px;
+    border: none;
+    color: rgb(42, 111, 244);
+    padding: 4px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+    text-decoration: none;
+}
+header .login-btn {
+    background-color: rgb(255, 255, 255);
+}
+header .signup-btn {
+    color: white;
+    border: 1px solid rgb(255, 255, 255);
+    margin-right: 30px;
+}
+.main {
+    display: inline-flex;
+    flex-direction:column;
+    width: 80%;
+    height: 98vh;
+    padding-top: 2vh;
+    margin-top: 50px;
+}
+.select-form {
+    height: 27px;
+    margin-left: 30px;
+    border-radius: 5px;
+
+}
+.form-card {
+    display: inline-flex;
+    flex-direction: column;
+    box-shadow: 0 0 10px #00000025;
+    border-radius: 7px;
+    margin: 10px; 
+    width: 250px;
+    height: 341px;
+}
+.img-container {
+    overflow: hidden;
+    height: 215px;
+    display: flex;
+    justify-content: center;
+}
+.card-img-top {
+    height: 212px;
+}
+.article-card {
+    min-width: 200px;
+    min-height: 40px;
+    padding: 6px;
+    justify-self: flex-end;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+    margin-left: 10px;
+}
 .artciles-big-container {
     display: inline-flex;
     width: 80%;
@@ -12,21 +85,24 @@ body {
 }
 .article-container {
     display: flex;
-    justify-content: space-between;
     align-items: flex-start;
+    flex-wrap: wrap;
     padding: 20px;
 }
 p {
-    margin: 3px 0;
+    margin: 4px 0;
 }
 .cart-container {
+    background-color: white;
     display: inline-flex;
+    min-width: 300px;
     width: 19%;
     height: 100vh;
     border-left: 1% solid black;
+    margin-top: 55px;
 }
 button {
-    background-color: rgb(62, 133, 199);
+    background-color: rgb(42, 111, 244);
     border: none;
     color: white;
     padding: 6px 8px;
